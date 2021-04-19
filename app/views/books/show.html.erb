@@ -1,0 +1,16 @@
+<h2>Book detail</h2>
+<div>
+  <%= link_to user_path(@user.id) do %>
+    <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+  <% end %>
+  <p>
+    <%= link_to book_path(@book.id) do %>
+      <%= @book.title %>
+    <% end %>
+  </p>
+  <p><%= @book.body %></p>
+  <% if @book.user_id == current_user.id %>
+    <%= link_to "Edit", edit_book_path(@book) %>
+    <%= link_to "Destroy", book_path(@book), method: :delete %>
+  <% end %>
+</div>

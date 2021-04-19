@@ -1,0 +1,23 @@
+<div class="profile-container">
+  <h3 class="profile-name"><%= @user.name %></h3>
+  <p class="profile-introduction"><%= @user.introduction %></p>
+  <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+  <% if @user.id == current_user.id %>
+    <p><%= link_to "Edit", edit_user_path %></p>
+  <% end %>
+</div>
+
+<% @books.each do |book| %>
+<div>
+  <%= link_to user_path(@user.id) do %>
+    <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+  <% end %>
+  <p>
+    <%= link_to book_path(book.id) do %>
+      <%= book.title %>
+    <% end %>
+  </p>
+  <p><%= book.body %></p>
+</div>
+<% end %>
+<%= paginate @books %>
